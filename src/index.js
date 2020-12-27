@@ -1,18 +1,20 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {View,Text} from 'react-native';
-import {HelloWorld} from '_atoms';
-import {Typography,Colors} from '_styles';
-import UserModel from "../src/models/UserModel";
-import Icon from 'react-native-vector-icons/AntDesign';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import {SplashScreen,LoginScreen} from '_scenes/index'
+
+const RootStack = createStackNavigator()
 
 const App = () => {
-  const userModel = new UserModel({username:"Lokesh The Developer"})
   return  (
-    <View style = {{justifyContent:"center",alignItems:"center", flex:1,flexDirection:"row"}}>
-      <HelloWorld name = {userModel.username} style = {{fontSize: Typography.FONT_SIZE_16}}/>
-      <Icon name="customerservice" size={80} color={Colors.SUCCESS}/>
-    </View>
+    <NavigationContainer>
+        <RootStack.Navigator screenOptions={{ animationEnabled: false, headerShown : false }}>
+            <RootStack.Screen name = {"SplashScreen"} component = {SplashScreen}/>
+            <RootStack.Screen name = {"LoginScreen"} component = {LoginScreen}/>
+        </RootStack.Navigator>
+    </NavigationContainer>
   )
 } 
 
