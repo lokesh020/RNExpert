@@ -7,16 +7,16 @@ import Images from '../assets/images/'
 
 function SplashScreen({route,navigation}) {
 
-    function navigateToLogin() {
+    function navigateToRootStack() {
         navigation.dispatch(
-            StackActions.replace('LoginScreen')
+            StackActions.replace('RootStackNav')
         )
     }
 
     useEffect(() => {
         
         setTimeout(() => {
-            navigateToLogin()
+            navigateToRootStack()
         }, 2000);
 
     }, [])
