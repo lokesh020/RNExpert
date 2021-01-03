@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "260534169991",
+    "project_id": "rnexpert-a16c2",
+    "storage_bucket": "rnexpert-a16c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260534169991:android:9bd6a8ef53aa42b2f8e322",
+        "android_client_info": {
+          "package_name": "com.rnexpert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260534169991-i0vvsivj4q6sc3vftq6oe3ck89ncev9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWihNiXS6fy_efgv3-nVdEMaGn1KqpqCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260534169991-i0vvsivj4q6sc3vftq6oe3ck89ncev9h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,15 +10,18 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {SplashScreen,LoginScreen,HomeScreen, TrendingScreen, SubscriptionScreen, SettingsScreen, AuthLoading} from '_scenes/index'
 import * as SessionManager from './utils/SessionManager'
+import NotificationManager from './utils/NotificationManager'
 
 import AuthContext from './contexts/AuthContext'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const NotifManager = new NotificationManager()
 
 enableScreens()
 
 function App () {
+
   return  (
     <SafeAreaProvider>
       <NavigationContainer>
@@ -113,7 +116,39 @@ function AuthStackNav() {
 }
 
 
-function AppStackNav() {
+function AppStackNav({navigation}) {
+
+  function getInitialNotification(notif){
+    console.log("get Initial Notification",notif)
+    if (notif != undefined && notif.data != undefined) {
+      navigation.navigate(notif.data.screenType)
+    }
+  }
+
+  function onNotificationTapped(notif){
+    console.log("Tapped Notification",notif)
+    if (notif != undefined && notif.data != undefined) {
+      navigation.navigate(notif.data.screenType)
+    }
+  }
+
+  function getNotificationInForeground(notif){
+    console.log("Notif in foreground",notif)
+    if (notif != undefined && notif.data != undefined) {
+      navigation.navigate(notif.data.screenType)
+    }
+  }
+
+  React.useEffect(() => {
+    NotifManager.getInitialNotification(getInitialNotification)
+    NotifManager.onNotificationTapped(onNotificationTapped)
+    NotifManager.getNotificationInForeground(getNotificationInForeground)
+    return ()=>{
+      NotifManager.unsubscribeforegroundMsgListener()
+      NotifManager.unsubscribeTapNotifListener()
+    }
+  },[])
+
 
   return(
     <Tab.Navigator 
