@@ -1,4 +1,6 @@
 import SplashScreen from '_scenes/SplashScreen'
+import AuthLoading from '_scenes/AuthLoading'
+
 import LoginScreen from '_scenes/AuthScreens/LoginScreen'
 
 //Home screens
@@ -9,6 +11,7 @@ import SettingsScreen from '_scenes/SettingsScreen'
 
 
 export {
+        AuthLoading,
         SplashScreen, 
         LoginScreen, 
         HomeScreen,
