@@ -13,6 +13,9 @@ import * as SessionManager from './utils/SessionManager'
 import NotificationManager from './utils/NotificationManager'
 
 import AuthContext from './contexts/AuthContext'
+import RootModalContext from './contexts/RootModalContext'
+
+import RootModal from './components/RootModal';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,14 +25,37 @@ enableScreens()
 
 function App () {
 
+  const [modalProps, setModalProps] = React.useState(null)
+  const [modalView, setModalView] = React.useState(null)
+  const [showModal, setShowModal] = React.useState(false)
+
+  const rootModalContext = React.useMemo(
+    () => ({
+      setUpModal: ({modalProps,modalView}) => {
+        setModalProps(modalProps)
+        setModalView(modalView)
+      },
+      showModal: () => {
+        setShowModal(true)
+      },
+      hideModal: async() => {
+        setShowModal(false)
+      }
+    }),
+    []
+  );
+
   return  (
     <SafeAreaProvider>
-      <NavigationContainer>
-          <Stack.Navigator screenOptions = {{headerShown : false,animationEnabled  : false}}>
-            <Stack.Screen name="SplashScreen" component={SplashScreen} />
-            <Stack.Screen name="RootStackNav" component={RootStackNav} />
-          </Stack.Navigator>
-      </NavigationContainer>
+      <RootModalContext.Provider value={rootModalContext}>
+        <NavigationContainer>
+            <Stack.Navigator screenOptions = {{headerShown : false,animationEnabled  : false}}>
+              <Stack.Screen name="SplashScreen" component={SplashScreen} />
+              <Stack.Screen name="RootStackNav" component={RootStackNav} />
+            </Stack.Navigator>
+            <RootModal visible = {showModal} modalView = {modalView} {...modalProps}/>
+        </NavigationContainer>
+     </RootModalContext.Provider>
     </SafeAreaProvider>
   )
 } 
@@ -89,15 +115,15 @@ function RootStackNav({navigation}) {
   );
 
   return(
-    <AuthContext.Provider value={authContext}>
-      <Stack.Navigator screenOptions = {{headerShown : false,animationEnabled:false}}>
-          {
-           (state.isLoading) ? <Stack.Screen name="AuthLoading" component={AuthLoading} />  : (state.userToken == null) ? 
-            <Stack.Screen name="AuthStackNav" component={AuthStackNav} /> : 
-            <Stack.Screen name="AppStackNav" component={AppStackNav} />
-          }
-      </Stack.Navigator>
-    </AuthContext.Provider>
+      <AuthContext.Provider value={authContext}>
+        <Stack.Navigator screenOptions = {{headerShown : false,animationEnabled:false}}>
+            {
+            (state.isLoading) ? <Stack.Screen name="AuthLoading" component={AuthLoading} />  : (state.userToken == null) ? 
+              <Stack.Screen name="AuthStackNav" component={AuthStackNav} /> : 
+              <Stack.Screen name="AppStackNav" component={AppStackNav} />
+            }
+        </Stack.Navigator>
+      </AuthContext.Provider>
   )
   
 }
@@ -117,7 +143,7 @@ function AuthStackNav() {
 
 
 function AppStackNav({navigation}) {
-
+  console.log('AppStackNav>>>>')
   function getInitialNotification(notif){
     console.log("get Initial Notification",notif)
     if (notif != undefined && notif.data != undefined) {

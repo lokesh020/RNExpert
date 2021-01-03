@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { View, Text , StyleSheet } from 'react-native'
+import { View, Text , StyleSheet, ActivityIndicator } from 'react-native'
 import {SafeAreaView } from 'react-native-safe-area-context';
 import AuthContext from './../../contexts/AuthContext'
 
@@ -9,10 +9,22 @@ import {Colors} from '_styles'
 import Input from "_components/Input";
 import FilledButton from "_components/FilledButton";
 import TextButton from "_components/TextButton";
+import RootModalContext from './../../contexts/RootModalContext';
+
+function SpinnerView() {
+    return (
+        <View style = {{flex:1, justifyContent:"center", alignItems:"center"}}>
+            <ActivityIndicator size="large" color="tomato" />
+        </View>
+    )
+}
 
 function LoginScreen({navigation}) {
+
     const {logIn} = React.useContext(AuthContext)
-    const [txtEmail, setTxtEmail] = useState('')
+    const {setUpModal, showModal, hideModal} = React.useContext(RootModalContext)
+    
+     const [txtEmail, setTxtEmail] = useState('')
     const [txtPassword, setTxtPassword] = useState('')
 
     function onChangeEmailText(txt) {
@@ -38,7 +50,19 @@ function LoginScreen({navigation}) {
     }
 
     function navigateToAppStackNav() {
-        logIn()
+        const config = {
+            modalView :  <SpinnerView/>,
+            modalProps : {
+                animationType : "none",
+                transparent : true
+            }
+        }
+        setUpModal(config)
+        showModal()
+        setTimeout(() => {
+            hideModal()
+            logIn()
+        }, 2000);
     }
 
 
