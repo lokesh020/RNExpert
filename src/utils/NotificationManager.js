@@ -1,4 +1,4 @@
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 
 
 class NotificationManager {

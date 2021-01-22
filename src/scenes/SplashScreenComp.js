@@ -1,34 +1,32 @@
 import React,{useEffect} from 'react'
 import { View, Image, StyleSheet } from 'react-native'
 import { StackActions } from '@react-navigation/native';
+import SplashScreen from 'react-native-splash-screen';
 
 
 import Images from '../assets/images/'
 
-function SplashScreen({route,navigation}) {
+function SplashScreenComp({route,navigation}) {
 
     function navigateToRootStack() {
         navigation.dispatch(
-            StackActions.replace('RootStackNav')
+            StackActions.replace('RootNavigator')
         )
     }
 
     useEffect(() => {
-        
-        setTimeout(() => {
-            navigateToRootStack()
-        }, 2000);
-
+        SplashScreen.hide()
+        navigateToRootStack()
     }, [])
 
     return (
         <View style = {styles.container}>
-            <Image source = {Images.img_youtube} style = {styles.logo} resizeMode = {"contain"} />
+            <Image source = {Images.img_splash} style = {styles.splash} resizeMode = {"contain"} />
         </View>
     )
 }
 
-export default SplashScreen
+export default SplashScreenComp
 
 const styles = StyleSheet.create({
     container: {
@@ -36,8 +34,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center"
     },
-    logo:{
-        width:150,
-        height:150
+    splash:{
+        flex:1
     }
 })

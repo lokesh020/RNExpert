@@ -1,11 +1,23 @@
-import {Dimensions,PixelRatio} from 'react-native';
+import {Dimensions,PixelRatio,Platform} from 'react-native';
 
-const WINDOW_WIDTH = Dimensions.get('window').width;
 const guidelineBaseWidth = 375;
 
-const WINDOW_HEIGHT = Dimensions.get("window").height
+export const WINDOW_HEIGHT = Dimensions.get("window").height
+export const WINDOW_WIDTH = Dimensions.get("window").width
+
+export const IS_PLATFORM_ANDROID = Platform.OS === "android"
+export const IS_PLATFORM_IOS = Platform.OS === "ios"
+
+
+
 
 export const scaleSize = size => (WINDOW_WIDTH/guidelineBaseWidth) * size;
+
+// screen ratio 
+export function scaleRatio(percent) {
+  const heightPercent = (percent * WINDOW_HEIGHT) / 100;
+  return Math.round(heightPercent);
+}
 
 export const scaleFont = size => size * PixelRatio.getFontScale();
 

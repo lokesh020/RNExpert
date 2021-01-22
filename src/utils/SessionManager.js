@@ -1,7 +1,8 @@
-import {storeData,getData, removeData} from './AsyncStorage'
+import {storeData,getData, removeData} from './LocalAsyncStorage'
 
 export const setLoginData = async (data) => {
     await storeData('@LOGIN_DATA', data)
+    return
 }
 
 export const getLoginData = async () => {

@@ -1,20 +1,27 @@
-import SplashScreen from '_scenes/SplashScreen'
-import AuthLoading from '_scenes/AuthLoading'
+import SplashScreenComp from './SplashScreenComp'
+import AuthLoading from './AuthLoading'
 
-import LoginScreen from '_scenes/AuthScreens/LoginScreen'
+// Auth screens
+import LoginScreen from './AuthScreens/LoginScreen'
+import SignUpScreen from './AuthScreens/SignUpScreen'
+import ForgotPassword from './AuthScreens/ForgotPassword'
+import ChangePassword from './AuthScreens/ChangePassword'
 
 //Home screens
-import HomeScreen from '_scenes/HomeScreen'
-import TrendingScreen from '_scenes/TrendingScreen'
-import SubscriptionScreen from '_scenes/SubscriptionScreen'
-import SettingsScreen from '_scenes/SettingsScreen'
+import DashboardScreen from './DashboardScreen'
+import TrendingScreen from './TrendingScreen'
+import SubscriptionScreen from './SubscriptionScreen'
+import SettingsScreen from './SettingsScreen'
 
 
 export {
         AuthLoading,
-        SplashScreen, 
-        LoginScreen, 
-        HomeScreen,
+        SplashScreenComp, 
+        LoginScreen,
+        SignUpScreen, 
+        ForgotPassword,
+        ChangePassword,
+        DashboardScreen,
         TrendingScreen,
         SubscriptionScreen,
         SettingsScreen

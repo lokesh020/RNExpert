@@ -1,11 +1,11 @@
 import React from 'react'
-import {StyleSheet,Text,TouchableOpacity} from 'react-native';
+import {StyleSheet,Text,Pressable} from 'react-native';
 
-function FilledButton({title,style,onPress,textStyle}) {
+const FilledButton = ({title,style,onPress,textStyle})=>{
     return (
-        <TouchableOpacity style = {[styles.container,style]} onPress = {onPress}>
+        <Pressable style = {[styles.container,style]} onPress = {onPress}>
             <Text style = {[styles.text,textStyle]}>{title}</Text>
-        </TouchableOpacity>
+        </Pressable>
     )
 }
 
