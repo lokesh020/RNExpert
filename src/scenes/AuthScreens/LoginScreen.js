@@ -22,6 +22,7 @@ import InputWithLeftIcon from "../../components/InputWithLeftIcon";
 import FilledButtonWithImg from "../../components/FilledButtonWithImg";
 import TextButton from "../../components/TextButton";
 
+import VideoPlayer from '../../components/AVPlayer/'
 
 
 function LoginScreen({ navigation }) {
@@ -67,8 +68,8 @@ function LoginScreen({ navigation }) {
             "deviceToken": "string",
             "userType": 0
         }
-        ApiManager.makePostRequest(true,WebConstants.kLogin, body).then((data) => {
-            
+        ApiManager.makePostRequest(true, WebConstants.kLogin, body).then((data) => {
+
         }).catch((errStatus) => {
 
         })
@@ -104,18 +105,10 @@ function LoginScreen({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <BackgroundImage />
-            <KeyboardAwareScrollView style={{ flex: 1 }}>
-                <View style={styles.container}>
-                    <LogoImage />
-                    <WelcomeText />
-                    <EmailInput value={txtEmail} onChange={(txt) => onChangeEmailText(txt)} />
-                    <PasswordInput value={txtPassword} onChange={(txt) => onChangePasswordText(txt)} />
-                    {/* <RememberMe checked = {isRemember} onChange = {onRememberMeChange}/> */}
-                    <LoginButton onPress={onLoginPress} />
-                    <ForgotPassword onPress={onForgotPasswordPress} />
-                    <SignUpButton onPress={onSignUpPress} />
-                </View>
-            </KeyboardAwareScrollView>
+            <View style={styles.container}>
+                <VideoPlayer style = {{height:250}} url={"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"} hideFullScreenControl = {false} rotateToFullScreen={true} />
+                <LogoImage/>
+            </View>
         </SafeAreaView>
     )
 }
@@ -210,8 +203,6 @@ export default LoginScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        padding: 20,
     },
     loginButton: {
         marginTop: Mixins.scaleRatio(6),
